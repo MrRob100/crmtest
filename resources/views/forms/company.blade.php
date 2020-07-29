@@ -1,4 +1,6 @@
-<form method="POST" action="{{ route('create') }}">
+<div class="modal-body">
+
+<form method="POST" action="{{ route('store') }}">
     @csrf
 
     {{--name--}}
@@ -36,7 +38,7 @@
         <label for="website" class="col-md-4 col-form-label text-md-right">{{ __('Website') }}</label>
 
         <div class="col-md-6">
-            <input id="website" type="url" class="form-control @error('website') is-invalid @enderror" name="website" autofocus>
+            <input id="website" type="text" class="form-control @error('website') is-invalid @enderror" name="website" autofocus>
 
             @error('password')
             <span class="invalid-feedback" role="alert">
@@ -51,7 +53,7 @@
         <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo') }}</label>
 
         <div class="col-md-6">
-            <input id="logo" type="file" class="form-control @error('logo') is-invalid @enderror" name="logo" autofocus>
+            <input id="logo" type="file" class="@error('logo') is-invalid @enderror" name="logo" autofocus>
 
             @error('password')
             <span class="invalid-feedback" role="alert">
@@ -60,4 +62,13 @@
             @enderror
         </div>
     </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+
 </form>
+
+
+</div>

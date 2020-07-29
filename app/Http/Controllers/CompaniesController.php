@@ -55,10 +55,33 @@ class CompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        //validate
-//        $company->name =
+
+        $this->validate($request,[
+          'name' => 'required|max:191',
+        ]);
 
 
+        if ($request->hasFile('logo')) {
+          $fileNameWithExt = $request->file('logo')->getClientOriginalName();
+
+          $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+
+          $extension = $request->file('logo')->getClientOriginalExtension();
+
+          $fileNameToStore = $filename . '_' . time() . '_' . $extension;
+
+          $path = $request->file('logo')->storeAs('public/storage/logos/', $fileNameToStore);
+        }
+        else {
+          $fileNameToStore = 'http://via.placeholder.com/100x100';
+        }
+
+        $Company = new Company;
+        $Company->name = $request->input('name');
+        $Company->email = $request->input('email');
+        $Company->website = $request->input('website');
+        $Company->logo = $fileNameToStore;
+        $Company->save();
 
         return redirect('/home');
     }
