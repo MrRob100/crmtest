@@ -110,7 +110,6 @@ class CompanyUnitTest extends TestCase
      */
     public function testViewAdminPage()
     {
-
         //testing that login is forced on home page
         $response = $this->get('/home');
         $response->assertStatus(302);
