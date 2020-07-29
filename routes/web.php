@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
 Auth::routes();
@@ -29,5 +29,6 @@ Route::get('/home/employees', 'EmployeesController@index')->name('home.employees
 Route::get('/create', 'CompaniesController@create')->name('create'); //test
 
 Route::post('/store', 'CompaniesController@store')->name('store');
+Route::post('/update', 'CompaniesController@update')->name('update');
 
 //Route::resource('companies', 'CompaniesController');
