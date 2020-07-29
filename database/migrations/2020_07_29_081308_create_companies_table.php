@@ -14,8 +14,8 @@ class CreateCompaniesTable extends Migration
     public function up()
     {
         Schema::create('companies', function (Blueprint $table) {
-            $table->id();
-            $table->string('name'); //required
+            $table->string('name'); //required, primary key
+            $table->primary('name'); //required, primary key
             $table->string('email')->nullable();
             $table->string('logo')->nullable(); //path but underlying asset has to be >= 100x100
             $table->string('website')->nullable();
