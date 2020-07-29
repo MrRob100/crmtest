@@ -267,6 +267,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </tr>
 
                     @endforeach
+
+                    {{ $companies->links() }}
+
                     </tbody>
                 @endif
                 @if ($list === 'Employees')

@@ -13,9 +13,11 @@ class CompaniesController extends Controller
 
     protected $singular = 'Company';
 
-    public function __construct(Company $company)
+    protected $Company;
+
+  public function __construct(Company $company)
     {
-        $this->model = $company;
+        $this->Company = $company;
         $this->middleware('auth');
     }
 
@@ -29,9 +31,13 @@ class CompaniesController extends Controller
 
         $list = $this->list;
         $singular = $this->singular;
-        $companies = Company::paginate(10)->SortByDesc('updated_at')->all();
+        $companies = $this->Company->orderBy('updated_at', 'desc')->paginate(10);
 
-        return view('home', compact('list', 'singular', 'companies'));
+        return view('home')
+            ->with('list', $list)
+            ->with('singular', $singular)
+            ->with('companies', $companies)
+            ->with('pagination', $companies);
     }
 
     /**
