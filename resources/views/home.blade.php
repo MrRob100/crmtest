@@ -225,7 +225,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <th>Email</th>
                         <th>Website</th>
                         <th>Logo</th>
-                        <th>Operations</th>
+                        <th><button class="btn btn-default waves-effect"><i class="fa fa-plus"></i></button></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -235,6 +235,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <td>{{ $company->email }}</td>
                             <td>{{ $company->website }}</td>
                             <td>{{ $company->logo }}</td>
+                            <td>
+                                <button class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
+                                <button class="btn btn-default waves-effect"><i class="fa fa-trash-alt"></i></button>
+                            </td>
                         </tr>
 
                     @endforeach
