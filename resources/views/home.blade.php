@@ -175,13 +175,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link active">
+                                <a href="#" class="nav-link {{ $list === 'Companies' ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Companies</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link {{ $list === 'Employees' ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Employees</p>
                                 </a>
@@ -204,13 +204,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Starter Page</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
-                        </ol>
+                        <h1 class="m-0 text-dark">{{ $list }}</h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -223,7 +217,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 {{--table here--}}
 
+                <table class="table">
+                @if ($list === 'Companies')
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Website</th>
+                        <th>Logo</th>
+                        <th>Operations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($companies as $company)
+                        <tr>
+                            <td>{{ $company->name }}</td>
+                            <td>{{ $company->email }}</td>
+                            <td>{{ $company->website }}</td>
+                            <td>{{ $company->logo }}</td>
+                        </tr>
 
+                    @endforeach
+                    </tbody>
+                @endif
+                @if ($list === 'Employees')
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Website</th>
+                        <th>Logo</th>
+                        <th>Operations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($companies as $company)
+                        <tr>
+                            <td>{{ $company->name }}</td>
+                            <td>{{ $company->email }}</td>
+                            <td>{{ $company->website }}</td>
+                            <td>{{ $company->logo }}</td>
+                        </tr>
+
+                    @endforeach
+                    </tbody>
+                @endif
+                </table>
 
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
