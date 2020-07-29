@@ -3,12 +3,14 @@
 namespace Tests\Unit;
 
 use App\Company;
+use App\User;
 use App\Http\Controllers\CompaniesController;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 //use PHPUnit\Framework\TestCase;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithAuthentication;
 
 
 class CompanyUnitTest extends TestCase
@@ -16,6 +18,11 @@ class CompanyUnitTest extends TestCase
 
     use RefreshDatabase;
 
+    /**
+     * Tests database has expected schema.
+     *
+     * @return void
+     */
     public function testCompaniesDatabaseTableHasExpectedColumns()
     {
         $this->assertTrue(
@@ -97,6 +104,30 @@ class CompanyUnitTest extends TestCase
         $retrieved_company = $company->all()->first();
         $retrieved_company->delete();
         $this->assertNull($company->all()->first());
+
+    }
+
+    /**
+     * Tests requests to view admin page.
+     *
+     * @return void
+     */
+    public function testViewAdminPage()
+    {
+        //testing that login is forced on home page
+        $response = $this->get('/home');
+        $response->assertStatus(302);
+
+
+        //testing that logging in redirects to homepage
+        $user = factory(User::class)->make();
+        $response_2 = $this->actingAs($user)->get('/login');
+        $response_2->assertRedirect('/home');
+
+
+        //testing that homepage is now available
+        $response_auth = $this->get('/home');
+        $response_auth->assertStatus(200);
 
     }
 
