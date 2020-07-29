@@ -118,12 +118,10 @@ class CompanyUnitTest extends TestCase
         $response = $this->get('/home');
         $response->assertStatus(302);
 
-
         //testing that logging in redirects to homepage
         $user = factory(User::class)->make();
         $response_2 = $this->actingAs($user)->get('/login');
         $response_2->assertRedirect('/home');
-
 
         //testing that homepage is now available
         $response_auth = $this->get('/home');
