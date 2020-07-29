@@ -24,13 +24,6 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
-     * The path to the "companies" route for your application.
-     *
-     * @var string
-     */
-    public const COMPANIES = '/home/companies';
-
-    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
