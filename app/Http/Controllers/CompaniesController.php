@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CompaniesController extends Controller
 {
@@ -62,15 +63,19 @@ class CompaniesController extends Controller
 
 
         if ($request->hasFile('logo')) {
+
           $fileNameWithExt = $request->file('logo')->getClientOriginalName();
 
           $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
           $extension = $request->file('logo')->getClientOriginalExtension();
 
-          $fileNameToStore = $filename . '_' . time() . '_' . $extension;
+          $fileNameToStore = $filename . '_' . time() . '_'.'.'. $extension;
 
-          $path = $request->file('logo')->storeAs('public/storage/logos/', $fileNameToStore);
+          $path = $request->file('logo')->storeAs('', $fileNameToStore);
+
+          $url = Storage::url($filename.".".$extension);
+
         }
         else {
           $fileNameToStore = 'http://via.placeholder.com/100x100';
