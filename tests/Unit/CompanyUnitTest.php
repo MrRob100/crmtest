@@ -14,9 +14,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class CompanyUnitTest extends TestCase
 {
 
-  use RefreshDatabase;
+    use RefreshDatabase;
 
-  public function testCompaniesDatabaseTableHasExpectedColumns()
+
+    public function testCompaniesDatabaseTableHasExpectedColumns()
     {
         $this->assertTrue(
             Schema::hasColumns('companies', [
@@ -35,7 +36,6 @@ class CompanyUnitTest extends TestCase
      */
     public function testCreateCompanyTest()
     {
-        //use model
         $data = [
             'name' => 'testcompany',
             'email' => 'test@company.com',
@@ -50,30 +50,21 @@ class CompanyUnitTest extends TestCase
         $company->website = $data['website'];
         $company->save();
 
+        //testing that data is stored
+        $this->assertTrue($company->save());
+
         $company_fetched = $company->all()->where('name',  '=', 'testcompany');
 
+        //testing that data is coming returned
+        $this->assertNotNull($company_fetched);
+
+        //testing that the right data is returned
         $this->assertEquals($company_fetched->first()->value('name'), $data['name']);
         $this->assertEquals($company_fetched->first()->value('email'), $data['email']);
         $this->assertEquals($company_fetched->first()->value('logo'), $data['logo']);
         $this->assertEquals($company_fetched->first()->value('website'), $data['website']);
 
     }
-
-
-    /**
-     * Tests returning company's db record.
-     *
-     * @return void
-     */
-//    public function testGetCompaniesTest()
-//    {
-//
-//      $companyController = new CompaniesController(new Company);
-//      $response = $companyController->index();
-//
-//
-//    }
-
 
     /**
      * Tests updating a company's db record.
