@@ -213,9 +213,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Main content -->
         <div class="content">
+
             <div class="container-fluid">
 
-                {{--table here--}}
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Create new {{ strtolower($singular) }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                            @include('forms.company')
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <table class="table">
                 @if ($list === 'Companies')
@@ -225,7 +247,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <th>Email</th>
                         <th>Website</th>
                         <th>Logo</th>
-                        <th><button class="btn btn-default waves-effect"><i class="fa fa-plus"></i></button></th>
+                        <th>
+                            <button title="add company" class="btn btn-default waves-effect" data-toggle="modal" data-target="#exampleModal">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -236,8 +262,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <td>{{ $company->website }}</td>
                             <td>{{ $company->logo }}</td>
                             <td>
-                                <button class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
-                                <button class="btn btn-default waves-effect"><i class="fa fa-trash-alt"></i></button>
+                                <button title="edit company" class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
+                                <button title="delete company" class="btn btn-outline-danger waves-effect"><i class="fa fa-trash-alt"></i></button>
                             </td>
                         </tr>
 

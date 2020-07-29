@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 class EmployeesController extends Controller
 {
 
+    protected $list = 'Employees';
+
+    protected $singular = 'Employee';
+
     public function __construct(Employee $employee)
     {
       $this->model = $employee;
@@ -22,11 +26,13 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $list = 'Employees';
+//        $list = 'Employees';
+        $list = $this->list;
+        $singular = $this->singular;
 
         $employees = Employee::paginate(10)->all();
 
-        return view('home', compact('list', 'employees'));
+        return view('home', compact('list', 'singular', 'employees'));
     }
 
     /**

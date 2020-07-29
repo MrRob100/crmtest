@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 class CompaniesController extends Controller
 {
 
+    protected $list = 'Companies';
+
+    protected $singular = 'Company';
+
     public function __construct(Company $company)
     {
         $this->model = $company;
@@ -22,11 +26,13 @@ class CompaniesController extends Controller
     public function index()
     {
 
-        $list = 'Companies';
+//        $list = 'Companies';
+        $list = $this->list;
+        $singular = $this->singular;
 
         $companies = Company::paginate(10)->all();
 
-        return view('home', compact('list', 'companies'));
+        return view('home', compact('list', 'singular', 'companies'));
     }
 
     /**
