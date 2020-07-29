@@ -15,6 +15,10 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->string('name'); //required
+            $table->string('email')->nullable();
+            $table->string('logo')->nullable(); //path but underlying asset has to be >= 100x100
+            $table->string('website')->nullable();
             $table->timestamps();
         });
     }
