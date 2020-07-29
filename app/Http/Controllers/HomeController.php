@@ -25,4 +25,15 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Show the application dashboard with companies showing.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function companies()
+    {
+        return view('companies');
+    }
+
 }
