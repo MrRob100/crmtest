@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
+use App\Employee;
 use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
 {
+
+    public function __construct(Employee $employee)
+    {
+      $this->model = $employee;
+      $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,9 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        //
+        $companies = Employee::all();
+
+        return view('home', compact('employees'));
     }
 
     /**
