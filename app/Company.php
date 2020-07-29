@@ -24,4 +24,9 @@ class Company extends Model
 
     protected $primaryKey = 'name';
     protected $keyType = 'string';
+
+    public function employees()
+    {
+      return $this->hasMany(Employee::class);
+    }
 }
