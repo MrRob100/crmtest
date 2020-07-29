@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CompaniesController extends Controller
 {
+
+    public function __construct(Company $company)
+    {
+        $this->model = $company;
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,9 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        //
+        $companies = Company::all();
+      
+        return view('home', compact('companies'));
     }
 
     /**
@@ -24,6 +35,8 @@ class CompaniesController extends Controller
     public function create()
     {
         //
+        return redirect('/home');
+
     }
 
     /**
@@ -34,7 +47,12 @@ class CompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate
+//        $company->name =
+
+
+
+        return redirect('/home');
     }
 
     /**
