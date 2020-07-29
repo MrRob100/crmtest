@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class CompaniesController extends Controller
 {
@@ -22,9 +21,12 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
 
-        return view('home', compact('companies'));
+        $list = 'Companies';
+
+        $companies = Company::paginate(10)->all();
+
+        return view('home', compact('list', 'companies'));
     }
 
     /**
