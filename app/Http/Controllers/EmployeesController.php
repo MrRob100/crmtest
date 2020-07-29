@@ -22,9 +22,11 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $companies = Employee::all();
+        $list = 'Employees';
 
-        return view('home', compact('employees'));
+        $employees = Employee::paginate(10)->all();
+
+        return view('home', compact('list', 'employees'));
     }
 
     /**

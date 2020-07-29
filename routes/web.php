@@ -19,4 +19,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//sort out naming
+Route::get('/home', 'CompaniesController@index')->name('home');
+Route::get('/home/employees', 'EmployeesController@index')->name('home.employees');
+
+
+
+//sport out if resource works
+Route::get('/create', 'CompaniesController@create')->name('create'); //test
+
+Route::post('/store', 'CompaniesController@store')->name('store');
+
+//Route::resource('companies', 'CompaniesController');

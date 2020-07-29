@@ -175,13 +175,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link {{ $list === 'Companies' ? 'active' : '' }}">
+                                <a href="{{ route('home') }}" class="nav-link {{ $list === 'Companies' ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Companies</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link {{ $list === 'Employees' ? 'active' : '' }}">
+                                <a href="{{ route('home.employees') }}" class="nav-link {{ $list === 'Employees' ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Employees</p>
                                 </a>
@@ -251,12 +251,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($companies as $company)
+                    @foreach ($employees as $employee)
                         <tr>
-                            <td>{{ $company->name }}</td>
-                            <td>{{ $company->email }}</td>
-                            <td>{{ $company->website }}</td>
-                            <td>{{ $company->logo }}</td>
+                            <td>{{ $employee->name }}</td>
+                            <td>{{ $employee->email }}</td>
+                            <td>{{ $employee->website }}</td>
+                            <td>{{ $employee->logo }}</td>
                         </tr>
 
                     @endforeach
