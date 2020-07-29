@@ -16,7 +16,6 @@ class CompanyUnitTest extends TestCase
 
     use RefreshDatabase;
 
-
     public function testCompaniesDatabaseTableHasExpectedColumns()
     {
         $this->assertTrue(
@@ -34,13 +33,20 @@ class CompanyUnitTest extends TestCase
      *
      * @return void
      */
-    public function testCreateCompanyTest()
+    public function testCompanyCRUDtest()
     {
         $data = [
             'name' => 'testcompany',
             'email' => 'test@company.com',
             'logo' => 'public/storage/logos/usp.png',
             'website' => 'www.testcompany.com'
+        ];
+
+        $data_new = [
+          'name' => 'newtestcompany',
+          'email' => 'newtest@company.com',
+          'logo' => 'public/storage/logos/newusp.png',
+          'website' => 'www.newtestcompany.com'
         ];
 
         $company = new Company;
@@ -53,7 +59,7 @@ class CompanyUnitTest extends TestCase
         //testing that data is stored
         $this->assertTrue($company->save());
 
-        $company_fetched = $company->all()->where('name',  '=', 'testcompany');
+        $company_fetched = $company->all()->where('name',  '=', $data['name']);
 
         //testing that data is coming returned
         $this->assertNotNull($company_fetched);
@@ -64,17 +70,35 @@ class CompanyUnitTest extends TestCase
         $this->assertEquals($company_fetched->first()->value('logo'), $data['logo']);
         $this->assertEquals($company_fetched->first()->value('website'), $data['website']);
 
-    }
 
-    /**
-     * Tests updating a company's db record.
-     *
-     * @return void
-     */
-//    public function testUpdateCompanyTest()
-//    {
-//        $this->assertTrue(true);
-//    }
+        //testing that data can be updated
+        $company_to_update = $company->all()->first();
+        $company_to_update->name = $data_new['name'];
+        $company_to_update->email = $data_new['email'];
+        $company_to_update->logo = $data_new['logo'];
+        $company_to_update->website = $data_new['website'];
+        $company_to_update->save();
+
+        $company_updated = $company->all()->where('name', '=', $data_new['name']);
+
+        //testing that data is coming returned
+        $this->assertNotNull($company_updated);
+
+        $this->assertEquals($company_updated->first()->value('name'), $data_new['name']);
+        $this->assertEquals($company_updated->first()->value('email'), $data_new['email']);
+        $this->assertEquals($company_updated->first()->value('logo'), $data_new['logo']);
+        $this->assertEquals($company_updated->first()->value('website'), $data_new['website']);
+
+        //check that old record isnt there anymore
+        $old = $company->all()->where('name',  '=', $data['name']);
+        $this->assertEmpty($old);
+
+        //testing that record can be deleted
+        $retrieved_company = $company->all()->first();
+        $retrieved_company->delete();
+        $this->assertNull($company->all()->first());
+
+    }
 
 
 }
