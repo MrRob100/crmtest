@@ -158,12 +158,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="/node_modules/admin-lte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
-                </div>
             </div>
 
             <!-- Sidebar Menu -->
@@ -214,6 +208,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main content -->
         <div class="content">
 
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+            @if (session('status2'))
+                <div class="alert alert-danger">
+                    {{ session('status2') }}
+                </div>
+            @endif
+
             <div class="container-fluid">
 
                 <!-- Modal -->
@@ -254,7 +259,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <td>{{ $company->name }}</td>
                             <td>{{ $company->email }}</td>
                             <td>{{ $company->website }}</td>
-                            <td>{{ $company->logo }}</td>
+                            <td><img height="50px" src="storage/{{ $company->logo }}"></td>
                             <td>
                                 <button title="edit company" class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
                                 <button title="delete company" class="btn btn-outline-danger waves-effect"><i class="fa fa-trash-alt"></i></button>

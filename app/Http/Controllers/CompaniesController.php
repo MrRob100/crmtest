@@ -27,11 +27,9 @@ class CompaniesController extends Controller
     public function index()
     {
 
-//        $list = 'Companies';
         $list = $this->list;
         $singular = $this->singular;
-
-        $companies = Company::paginate(10)->all();
+        $companies = Company::paginate(10)->SortByDesc('updated_at')->all();
 
         return view('home', compact('list', 'singular', 'companies'));
     }
@@ -64,15 +62,25 @@ class CompaniesController extends Controller
 
         if ($request->hasFile('logo')) {
 
-          $fileNameWithExt = $request->file('logo')->getClientOriginalName();
+          $file = $request->file('logo');
+
+          $imagesize = getimagesize($file);
+
+          if ($imagesize[0] > 100 && $imagesize[1] > 100) {
+
+          } else {
+              return redirect('/home')->with('status2', 'image too small, company not saved');
+          }
+
+          $fileNameWithExt = $file->getClientOriginalName();
 
           $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
 
-          $extension = $request->file('logo')->getClientOriginalExtension();
+          $extension = $file->getClientOriginalExtension();
 
-          $fileNameToStore = $filename . '_' . time() . '_'.'.'. $extension;
+          $fileNameToStore = $filename . '_' . time() .'.'. $extension;
 
-          $path = $request->file('logo')->storeAs('', $fileNameToStore);
+          $path = $file->storeAs('public', $fileNameToStore);
 
           $url = Storage::url($filename.".".$extension);
 
@@ -88,7 +96,7 @@ class CompaniesController extends Controller
         $Company->logo = $fileNameToStore;
         $Company->save();
 
-        return redirect('/home');
+        return redirect('/home')->with('status', 'company data saved successfully');
     }
 
     /**
