@@ -4,14 +4,10 @@ namespace Tests\Unit;
 
 use App\Company;
 use App\User;
-use App\Http\Controllers\CompaniesController;
-use Illuminate\Http\Request;
 use Tests\TestCase;
 //use PHPUnit\Framework\TestCase;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithAuthentication;
-
 
 class CompanyUnitTest extends TestCase
 {
@@ -114,6 +110,7 @@ class CompanyUnitTest extends TestCase
      */
     public function testViewAdminPage()
     {
+
         //testing that login is forced on home page
         $response = $this->get('/home');
         $response->assertStatus(302);
