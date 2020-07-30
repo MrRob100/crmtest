@@ -15,7 +15,7 @@ class EmployeesController extends Controller
 
     public function __construct(Employee $employee)
     {
-      $this->model = $employee;
+      $this->Employee = $employee;
       $this->middleware('auth');
     }
 
@@ -26,13 +26,15 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-//        $list = 'Employees';
-        $list = $this->list;
-        $singular = $this->singular;
+      $list = $this->list;
+      $singular = $this->singular;
+      $employees = $this->Employee->orderBy('updated_at', 'desc')->paginate(10);
 
-        $employees = Employee::paginate(10)->all();
-
-        return view('home', compact('list', 'singular', 'employees'));
+      return view('home')
+        ->with('list', $list)
+        ->with('singular', $singular)
+        ->with('employees', $employees)
+        ->with('pagination', $employees);
     }
 
     /**
@@ -53,7 +55,19 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request,[
+        'first_name' => 'required|max:191',
+        'last_name' => 'required|max:191',
+        'company' => 'required|max:191'
+      ]);
+
+      $Employee = new Company;
+      $Employee->first_name = $request->input('first_name');
+      $Employee->last_name = $request->input('last_name');
+      $Employee->company = $request->input('company');
+      $Employee->email = $request->input('email');
+      $Employee->phone = $request->input('phone');
+      $Employee->save();
     }
 
     /**
@@ -85,7 +99,7 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
     }

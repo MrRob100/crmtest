@@ -47,8 +47,6 @@ class CompaniesController extends Controller
     public function create()
     {
         //
-        return redirect('/home');
-
     }
 
     /**
