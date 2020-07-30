@@ -238,7 +238,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <td><img height="50px" src="storage/{{ $company->logo }}"></td>
                             <td>
                                 <button onclick="showEdit('{{ $company->name }}')" title="edit company" class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
-                                <button title="delete company" class="btn btn-outline-danger waves-effect"><i class="fa fa-trash-alt"></i></button>
+                                <a href="{{route('companies.destroy',$company->name)}}" class="btn btn-outline-danger waves-effect"><i class="fa fa-trash-alt"></i></a>
+
                             </td>
                         </tr>
 

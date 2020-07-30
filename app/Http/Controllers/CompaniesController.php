@@ -128,7 +128,7 @@ class CompaniesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $company
      * @return \Illuminate\Http\Response
      */
     public function update($company, Request $request)
@@ -145,8 +145,10 @@ class CompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($company)
     {
-        //
+        $this->Company->where('name', '=', $company)->delete();
+
+        return redirect('/home')->with('status', 'company data deleted successfully');
     }
 }

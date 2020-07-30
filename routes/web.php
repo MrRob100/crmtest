@@ -32,7 +32,7 @@ Route::get('/home/employees', 'EmployeesController@index')->name('home.employees
 //companies
 Route::post('/store', 'CompaniesController@store')->name('companies.store');
 Route::post('/update/{company}', 'CompaniesController@update')->name('companies.update');
-//Route::get('/employee/delete/{employee}', 'EmployeeController@destroy')->name('employee_delete');
+Route::get('/destroy/{company}', 'CompaniesController@destroy')->name('companies.destroy');
 
 
 //Route::resource('companies', 'CompaniesController');
