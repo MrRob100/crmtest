@@ -1,6 +1,6 @@
 <div class="modal-body">
 
-<form method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
+<form id="company-form" method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
     @csrf
 
     {{--name--}}

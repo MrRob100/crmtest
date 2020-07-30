@@ -128,21 +128,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <th>Website</th>
                         <th>Logo</th>
                         <th>
-                            <button title="add company" class="btn btn-default waves-effect" data-toggle="modal" data-target="#createModal">
+                            <button onclick="clearForm()" title="add company" class="btn btn-default waves-effect" data-toggle="modal" data-target="#createModal">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
+
                     @foreach ($companies as $key => $company)
                         <tr>
                             <td id="comp-name-{{ $key }}">{{ $company->name }}</td>
-                            <td>{{ $company->email }}</td>
-                            <td>{{ $company->website }}</td>
+                            <td id="comp-email-{{ $key }}">{{ $company->email }}</td>
+                            <td id="comp-website-{{ $key }}">{{ $company->website }}</td>
                             <td><img height="50px" src="storage/{{ $company->logo }}"></td>
                             <td>
-                                <button title="edit company" class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
+                                <button onclick="populateEditFields({{ $key }})" data-toggle="modal" data-target="#createModal" title="edit company" class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
                                 <button title="delete company" class="btn btn-outline-danger waves-effect"><i class="fa fa-trash-alt"></i></button>
                             </td>
                         </tr>
