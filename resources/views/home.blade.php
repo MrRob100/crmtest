@@ -156,7 +156,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <div style="display:none" class="edit-item" id="edit-item-{{ $company->name }}">
                             <h3>Edit company: {{ $company->name }}</h3>
-                            <form method="POST" action="{{ route('companies.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('companies.update', $company->name) }}" enctype="multipart/form-data">
+                            {{--<form method="PUT" action="{{ route('companies.update', $company->name) }}" enctype="multipart/form-data">--}}
                                 @csrf
 
                                 {{--name--}}
@@ -164,7 +165,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="" required autofocus>
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $company->name }}" autofocus>
 
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -179,7 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="" autofocus>
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $company->email }}" autofocus>
 
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -194,7 +195,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <label for="website" class="col-md-4 col-form-label text-md-right">{{ __('Website') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="website" type="text" class="form-control @error('website') is-invalid @enderror" name="website" autofocus>
+                                        <input id="website" type="text" class="form-control @error('website') is-invalid @enderror" name="website" value="{{ $company->website }}" autofocus>
 
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -209,6 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo') }}</label>
 
                                     <div class="col-md-6">
+                                        <small>{{ $company->logo }}</small>
                                         <input id="logo" type="file" class="@error('logo') is-invalid @enderror" name="logo" autofocus>
 
                                         @error('password')
