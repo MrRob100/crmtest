@@ -26,9 +26,12 @@ Route::get('/home/employees', 'EmployeesController@index')->name('home.employees
 
 
 //sport out if resource works
-Route::get('/create', 'CompaniesController@create')->name('create'); //test
+//Route::get('/create', 'CompaniesController@create')->name('create'); //test
+//
+//Route::post('/store', 'CompaniesController@store')->name('store');
+//Route::post('/update', 'CompaniesController@update')->name('update');
+//Route::get('/employee/delete/{employee}', 'EmployeeController@destroy')->name('employee_delete');
 
-Route::post('/store', 'CompaniesController@store')->name('store');
-Route::post('/update', 'CompaniesController@update')->name('update');
 
-//Route::resource('companies', 'CompaniesController');
+Route::resource('companies', 'CompaniesController');
+Route::resource('Employees', 'EmployeesController');

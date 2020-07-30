@@ -130,7 +130,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </button>
                             </div>
 
-                            @include('forms.company')
 
                         </div>
                     </div>
@@ -154,13 +153,89 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <tbody>
 
                     @foreach ($companies as $key => $company)
+
+                        <div style="display:none" class="edit-item" id="edit-item-{{ $company->name }}">
+                            <h3>Edit company: {{ $company->name }}</h3>
+                            <form method="POST" action="{{ route('companies.store') }}" enctype="multipart/form-data">
+                                @csrf
+
+                                {{--name--}}
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="" required autofocus>
+
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{--email--}}
+                                <div class="form-group row">
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="" autofocus>
+
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{--website--}}
+                                <div class="form-group row">
+                                    <label for="website" class="col-md-4 col-form-label text-md-right">{{ __('Website') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="website" type="text" class="form-control @error('website') is-invalid @enderror" name="website" autofocus>
+
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{--logo--}}
+                                <div class="form-group row">
+                                    <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="logo" type="file" class="@error('logo') is-invalid @enderror" name="logo" autofocus>
+
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button onclick="hideEdit('{{ $company->name }}')" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+
+                            </form>
+
+
+                        </div>
+
                         <tr>
                             <td id="comp-name-{{ $key }}">{{ $company->name }}</td>
                             <td id="comp-email-{{ $key }}">{{ $company->email }}</td>
                             <td id="comp-website-{{ $key }}">{{ $company->website }}</td>
                             <td><img height="50px" src="storage/{{ $company->logo }}"></td>
                             <td>
-                                <button onclick="populateEditFields({{ $key }})" data-toggle="modal" data-target="#createModal" title="edit company" class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
+                                <button onclick="showEdit('{{ $company->name }}')" title="edit company" class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
                                 <button title="delete company" class="btn btn-outline-danger waves-effect"><i class="fa fa-trash-alt"></i></button>
                             </td>
                         </tr>
@@ -189,6 +264,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <tbody>
 
                         @foreach ($employees as $key => $employee)
+
+                            @include('forms.employee')
+
                             <tr>
                                 <td id="emp-first-name-{{ $key }}">{{ $employee->first_name }}</td>
                                 <td id="emp-last-name-{{ $key }}">{{ $employee->last_name }}</td>
@@ -201,9 +279,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </td>
                             </tr>
 
-                    @endforeach
+                        @endforeach
 
-                    {{ $employees->links() }}
+                        {{ $employees->links() }}
 
                         </tbody>
                 @endif
