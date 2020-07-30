@@ -135,8 +135,11 @@ class CompaniesController extends Controller
      */
     public function update(Request $request)
     {
-        dump($request);
-        die();
+        unset($request['_token']);
+        $this->Company->where('name', '=', $request->name)->update($request->all());
+
+        return redirect('/home')->with('status', 'company data updated successfully');
+
     }
 
     /**
