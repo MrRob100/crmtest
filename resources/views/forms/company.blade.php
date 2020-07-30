@@ -1,5 +1,6 @@
 <div class="modal-body">
-
+    <input type="hidden" id="create-route" value="{{ route('store') }}">
+    <input type="hidden" id="update-route" value="{{ route('update') }}">
 <form id="company-form" method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
     @csrf
 

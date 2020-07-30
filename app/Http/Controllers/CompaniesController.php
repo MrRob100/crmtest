@@ -28,7 +28,6 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-
         $list = $this->list;
         $singular = $this->singular;
         $companies = $this->Company->orderBy('updated_at', 'desc')->paginate(10);
@@ -134,9 +133,10 @@ class CompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        dump($request);
+        die();
     }
 
     /**

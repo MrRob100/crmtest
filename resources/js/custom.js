@@ -28,9 +28,11 @@ function populateEditFields(key) {
     var modalLabel = document.getElementById('createModalLabel');
     modalLabel.innerText = 'Edit Company'
 
-    var form = document.getElementById('createModalLabel');
-    var routName = window.origin;
-    form.setAttribute('action', routName);
+    //route
+    var form = document.getElementById('company-form');
+    var routeName = document.getElementById('update-route').value;
+    form.setAttribute('action', routeName);
+
 }
 
 function clearForm() {
@@ -39,5 +41,10 @@ function clearForm() {
     //other
     var modalLabel = document.getElementById('createModalLabel');
     modalLabel.innerText = 'Create new company';
+
+    //route
+    var form = document.getElementById('company-form');
+    var routeName = document.getElementById('create-route').value;
+    form.setAttribute('action', routeName);
 }
 
