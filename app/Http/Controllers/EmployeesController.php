@@ -102,9 +102,12 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update($employee, Request $request)
     {
-        //
+        $request->request->remove('_token');
+        $this->Employee->where('id', '=', $employee)->update($request->all());
+
+        return redirect('/home/employees')->with('status', 'employee data updated successfully');
     }
 
     /**
@@ -115,6 +118,7 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->Employee->where('id', '=', $id)->delete();
+        return redirect('/home/employees')->with('status', 'employee data deleted successfully');
     }
 }

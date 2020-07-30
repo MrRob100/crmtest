@@ -271,7 +271,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <div style="display:none" class="edit-item" id="edit-item-{{ $employee->id }}">
 
-                            <form id="employee-form" method="POST" action="{{ route('employees.store') }}" enctype="multipart/form-data">
+                            <form id="employee-form" method="POST" action="{{ route('employees.update', $employee->id) }}" enctype="multipart/form-data">
                                 @csrf
 
                                 first_name
@@ -366,7 +366,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <td id="emp-phone={{ $key }}">{{ $employee->phone }}"</td>
                                 <td>
                                     <button onclick="showEdit('{{ $employee->id }}')" class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
-                                    <button title="delete employee" class="btn btn-outline-danger waves-effect"><i class="fa fa-trash-alt"></i></button>
+                                    <a href="{{route('employees.destroy',$employee->id)}}" class="btn btn-outline-danger waves-effect"><i class="fa fa-trash-alt"></i></a>
                                 </td>
                             </tr>
 
