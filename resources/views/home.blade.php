@@ -130,6 +130,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </button>
                             </div>
 
+                            @include('forms.employee')
 
                         </div>
                     </div>
@@ -144,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <th>Website</th>
                         <th>Logo</th>
                         <th>
-                            <button onclick="clearForm()" title="add company" class="btn btn-default waves-effect" data-toggle="modal" data-target="#createModal">
+                            <button title="add company" class="btn btn-default waves-effect" data-toggle="modal" data-target="#createModal">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </th>
@@ -258,7 +259,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <th>Email</th>
                             <th>Phone</th>
                             <th>
-                                <button onclick="clearEmpForm()" title="add company" class="btn btn-default waves-effect" data-toggle="modal" data-target="#createEmpModal">
+                                <button title="add employee" class="btn btn-default waves-effect" data-toggle="modal" data-target="#createEmpModal">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </th>
@@ -274,10 +275,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <td id="emp-first-name-{{ $key }}">{{ $employee->first_name }}</td>
                                 <td id="emp-last-name-{{ $key }}">{{ $employee->last_name }}</td>
                                 <td id="emp-company-{{ $key }}">{{ $employee->company }}</td>
-                                <td id="emp-email={{ $key }}">{{ $employee->email }}"></td>
-                                <td id="emp-phone={{ $key }}">{{ $employee->phone }}"></td>
+                                <td id="emp-email={{ $key }}">{{ $employee->email }}"</td>
+                                <td id="emp-phone={{ $key }}">{{ $employee->phone }}"</td>
                                 <td>
-                                    <button onclick="populateEditEmpFields({{ $key }})" data-toggle="modal" data-target="#createEmpModal" title="edit employee" class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
+                                    <button data-toggle="modal" data-target="#createEmpModal" title="edit employee" class="btn btn-default waves-effect"><i class="fa fa-pencil-alt"></i></button>
                                     <button title="delete employee" class="btn btn-outline-danger waves-effect"><i class="fa fa-trash-alt"></i></button>
                                 </td>
                             </tr>

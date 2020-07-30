@@ -61,13 +61,16 @@ class EmployeesController extends Controller
         'company' => 'required|max:191'
       ]);
 
-      $Employee = new Company;
+      $Employee = new Employee;
       $Employee->first_name = $request->input('first_name');
       $Employee->last_name = $request->input('last_name');
       $Employee->company = $request->input('company');
       $Employee->email = $request->input('email');
       $Employee->phone = $request->input('phone');
       $Employee->save();
+
+      return redirect('/home/employees')->with('status', 'employee data saved successfully');
+
     }
 
     /**

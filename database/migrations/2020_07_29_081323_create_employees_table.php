@@ -23,7 +23,7 @@ class CreateEmployeesTable extends Migration
               ->on('companies')
               ->onDelete('cascade');
             $table->string('email')->nullable();
-            $table->integer('phone')->nullable();
+            $table->bigInteger('phone')->nullable();
             $table->timestamps();
         });
     }

@@ -1,15 +1,13 @@
 <div class="modal-body">
-    <input type="hidden" id="create-route" value="{{ route('store') }}">
-    <input type="hidden" id="update-route" value="{{ route('update') }}">
-    <form id="employee-form" method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
+    <form id="employee-form" method="POST" action="{{ route('employees.store') }}" enctype="multipart/form-data">
         @csrf
 
-        {{--name--}}
+        first_name
         <div class="form-group row">
-            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+            <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First name') }}</label>
 
             <div class="col-md-6">
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="" required autofocus>
+                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="" required autofocus>
 
                 @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -19,12 +17,12 @@
             </div>
         </div>
 
-        {{--email--}}
+        last_name
         <div class="form-group row">
-            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+            <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Last name') }}</label>
 
             <div class="col-md-6">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="" autofocus>
+                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="" required autofocus>
 
                 @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -34,12 +32,12 @@
             </div>
         </div>
 
-        {{--website--}}
+        website
         <div class="form-group row">
-            <label for="website" class="col-md-4 col-form-label text-md-right">{{ __('Website') }}</label>
+            <label for="Company" class="col-md-4 col-form-label text-md-right">{{ __('Company') }}</label>
 
             <div class="col-md-6">
-                <input id="website" type="text" class="form-control @error('website') is-invalid @enderror" name="website" autofocus>
+                <input id="company" type="text" class="form-control @error('company') is-invalid @enderror" name="company" autofocus>
 
                 @error('password')
                 <span class="invalid-feedback" role="alert">
@@ -49,14 +47,29 @@
             </div>
         </div>
 
-        {{--logo--}}
+        email
         <div class="form-group row">
-            <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo') }}</label>
+            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
             <div class="col-md-6">
-                <input id="logo" type="file" class="@error('logo') is-invalid @enderror" name="logo" autofocus>
+                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="" required autofocus>
 
-                @error('password')
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+            </div>
+        </div>
+
+        phone
+        <div class="form-group row">
+            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+
+            <div class="col-md-6">
+                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="" required autofocus>
+
+                @error('email')
                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
